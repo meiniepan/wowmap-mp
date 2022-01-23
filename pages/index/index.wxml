@@ -1,0 +1,76 @@
+<!--index.wxml-->
+<view class="out">
+    <image class="bac" src="{{bac}}" mode="aspectFill"></image>
+    <view class="top" style="margin-top: {{topMargin}}px;z-index: 9">
+        <view class="top2">
+            <text class="role" style="color:{{curRole.color}}">{{curRole.addRoleName+curRole.addAccountName}}</text>
+            <image class="icon" src="../../assets/images/{{curRole.icon}}" mode="aspectFill"></image>
+            <picker bindchange="doAct"
+                    data-type="indexAct" value="{{}}" range="{{actArrays}}">
+                <image class="iconAdd" src="../../assets/images/ic_add.png" mode="aspectFill"></image>
+
+            </picker>
+        </view>
+        <view class="cells-map">
+            <view class="cell-map" wx:for="{{mapArray}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+                  data-url="{{bean.click}}" bindtap="doClick">
+                <image class="map-bac"
+                       src="../../assets/images/{{bean.checked?'bac_border2.jpg':'bac_border.png'}}"></image>
+                <view class="cell-text">
+                    <text class="text1">{{bean.name}}</text>
+                    <text class="text2">{{bean.remark}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<page-container
+        show="{{show}}"
+        overlay="{{show}}"
+        close-on-slide-down
+        duration="300"
+        position="bottom"
+        z-index="999"
+        round
+        bindclickoverlay="onClickOverlay"
+        overlayStyle='z-index:99'
+        customStyle='z-index:999'
+>
+    <view class="layout0">
+        <view class="add" style="margin: auto">{{addTitle}}</view>
+        <view wx:if="{{addTitle=='创建角色'}}">
+        <input style="margin-top: 80rpx" placeholder="输入角色名" bindinput="doInput" data-type="addRoleName"></input>
+        <picker bindchange="doJob"
+                data-type="indexAct" value="{{}}" range="{{jobArrays}}">
+            <view style="margin-top: 40rpx;display: flex;height: 50rpx;align-items: center">
+                <view class="job" >{{jobString}}</view>
+                <view class="job-dot" style=""></view>
+            </view>
+        </picker>
+        <input style="margin-top: 40rpx" placeholder="所属账号" bindinput="doInput" data-type="addAccountName"></input>
+        </view>
+
+        <view wx:else>
+            <input style="margin-top: 80rpx" placeholder="输入副本名" bindinput="doInput" data-type="addMapName"></input>
+            <picker bindchange="doWeek"
+                    data-type="indexAct" value="3" range="{{weekArrays}}">
+                <view style="margin-top: 40rpx;display: flex;height: 50rpx;align-items: center">
+                    <view style="margin-right: 40rpx">刷新日</view>
+                    <view class="job" >{{weekString}}</view>
+                    <view class="job-dot" style=""></view>
+                </view>
+            </picker>
+            <picker bindchange="doGap"
+                    data-type="indexAct" value="2" range="{{gapArrays}}">
+                <view style="margin-top: 40rpx;display: flex;height: 50rpx;align-items: center">
+                    <view style="margin-right: 40rpx">刷新冷却</view>
+                    <view class="job" >{{gapString}}</view>
+                    <view class="job-dot" style=""></view>
+                </view>
+            </picker>
+        </view>
+
+        <view class="btn2" bindtap="doBtn2">确定</view>
+    </view>
+</page-container>

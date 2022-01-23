@@ -1,0 +1,73 @@
+/**app.wxss**/
+page {
+    --themeColor: #F95B49;
+    --tintBac: #F5F7FD;
+    --BaseBac: #7D7C75;
+    --tint0: #97A0C3;
+    --commonBac: #ffffff;
+    --white: #ffffff;
+    --splitColor: #E3E6E9;
+    --commonBlack: #222222;
+    --commonYellow: #CC8A28;
+    --purple: #9C27B0;
+    --commonRed2: #F95B49;
+    --commonHint: #999999;
+    --grayF6: #F6F6F6;
+    --grayEE: #EEEEEE;
+    --orange: #FF9040;
+
+    --themeBac: linear-gradient(to right, #EF8D82, #F95B49);
+    --titlePadding: 46rpx;
+    --textHeight: 88rpx;
+    --maxWidth: 500rpx;
+    --maxTextWidth: 300rpx;
+
+    font-size: 32rpx;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+    display: none;
+}
+
+.singleLine {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.singleLine-more {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    white-space: normal !important;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.text {
+    font-size: 30rpx;
+    color: var(--commonBlack);
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.hint {
+    font-size: 28rpx;
+    color: var(--commonHint);
+}
+
+.out {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    font-size: 28rpx;
+    box-sizing: border-box;
+}
