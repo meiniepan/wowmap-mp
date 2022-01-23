@@ -1,1 +1,24 @@
 /* pages/mapDetail/mapDetail.wxss */
+page{
+    background: pink;
+}
+.cell-role{
+    display: flex;
+    align-items: center;
+    height: 100rpx;
+    padding: 0 40rpx;
+    margin: 20rpx 40rpx;
+    background: var(--BaseBac);
+    border-radius: 20rpx;
+}
+.icon{
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 50%;
+}
+.text{
+    margin-left: 40rpx;
+    display: flex;
+    font-size: 40rpx;
+    flex-grow: 1;
+}

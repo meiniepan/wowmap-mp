@@ -5,7 +5,7 @@
     z-index: 1;
     width: 100%;
     height: 100%;
-    background: darkseagreen;
+    background: var(--themeBac);
 }
 
 .top {
@@ -22,6 +22,7 @@
     height: 100rpx;
     width: 100%;
     align-items: center;
+    justify-content: space-between;
     box-sizing: border-box;
 }
 
@@ -39,9 +40,8 @@
 
 .role {
     display: flex;
-    flex-grow: 1;
     position: relative;
-    margin-right: 20rpx;
+    width: calc(100vw - 150rpx);
     height: 100rpx;
     align-items: center;
     font-size: 40rpx;
@@ -130,4 +130,10 @@
     border-radius: 50%;
     box-sizing: border-box;
     margin-left: 10rpx
+}
+.cell-del{
+    display: flex;
+    align-items: center;
+    height: 100rpx;
+    justify-content: center;
 }

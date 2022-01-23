@@ -1,2 +1,11 @@
 <!--pages/mapDetail/mapDetail.wxml-->
-<text>pages/mapDetail/mapDetail.wxml</text>
+<view class="out">
+<view class="cells-role" style="margin-top: 80rpx">
+    <view class="cell-role" wx:for="{{mData.roles}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+          data-position="{{idx}}" >
+        <image class="icon" src="../../assets/images/{{bean.icon}}" mode="aspectFill"></image>
+        <text class="text" style="color: {{bean.color}}">{{bean.name}}</text>
+        <switch checked="{{bean.checked}}" color="pink" data-position="{{idx}}" bindchange="switchChange"/>
+    </view>
+</view>
+</view>

@@ -1,6 +1,6 @@
 /**app.wxss**/
 page {
-    --themeColor: #F95B49;
+    --themeColor: #1677FF;
     --tintBac: #F5F7FD;
     --BaseBac: #7D7C75;
     --tint0: #97A0C3;
@@ -16,7 +16,7 @@ page {
     --grayEE: #EEEEEE;
     --orange: #FF9040;
 
-    --themeBac: linear-gradient(to right, #EF8D82, #F95B49);
+    --themeBac: linear-gradient(to right, #445FF5, #6D0BBD);
     --titlePadding: 46rpx;
     --textHeight: 88rpx;
     --maxWidth: 500rpx;

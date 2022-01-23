@@ -1,4 +1,5 @@
 // pages/mapDetail/mapDetail.js
+const app = getApp()
 Page({
 
   /**
@@ -12,7 +13,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let bean = JSON.parse(options.bean)
+    let roles = JSON.parse(options.roles)
+    console.log("roles",bean)
+    roles.forEach(it=>{
+      it.checked = false
+      bean.roles.forEach(it2=>{
+        if (it2.name==it.name && it2.checked){
+          it.checked = true
+          it.next_refresh = it2.next_refresh
+        }
+      })
+    })
+    bean.roles = roles
+    this.setData({
+      mData: bean
+    })
+    wx.setNavigationBarTitle({
+      title: bean.name
+    })
   },
 
   /**
@@ -27,6 +46,22 @@ Page({
    */
   onShow: function () {
 
+  },
+  switchChange(e){
+    let p = e.currentTarget.dataset.position
+    let data = this.data.mData.roles
+
+    data[p].checked = e.detail.value
+    if (e.detail.value){
+      let next_refresh = this.data.mData.refresh_time
+      let cur = parseInt(new Date().getTime() / 1000)
+      while (next_refresh < cur) {
+        next_refresh += this.data.mData.gap
+      }
+      data[p].next_refresh = next_refresh
+    }
+
+    app.onUp(this.data.mData._id,data)
   },
 
   /**

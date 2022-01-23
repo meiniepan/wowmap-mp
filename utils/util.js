@@ -6,7 +6,7 @@ function showModal(content, title = '温馨提示', suc = () => {
     success(res) {
       suc(res)
     },
-    confirmColor: "#F95B49",
+    confirmColor: "#1677FF",
   })
 }
 

@@ -1,9 +1,13 @@
 <!--index.wxml-->
+
 <view class="out">
     <image class="bac" src="{{bac}}" mode="aspectFill"></image>
     <view class="top" style="margin-top: {{topMargin}}px;z-index: 9">
         <view class="top2">
-            <text class="role" style="color:{{curRole.color}}">{{curRole.addRoleName+curRole.addAccountName}}</text>
+            <picker bindchange="chooseRole"
+                    data-type="indexAct" value="{{}}" range="{{roleArray}}" range-key="name">
+            <text class="role singleLine"  style="color:{{curRole.color}}">{{curRole.name+' '+curRole.account}}</text>
+            </picker>
             <image class="icon" src="../../assets/images/{{curRole.icon}}" mode="aspectFill"></image>
             <picker bindchange="doAct"
                     data-type="indexAct" value="{{}}" range="{{actArrays}}">
@@ -13,12 +17,12 @@
         </view>
         <view class="cells-map">
             <view class="cell-map" wx:for="{{mapArray}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
-                  data-url="{{bean.click}}" bindtap="doClick">
+                  data-position="{{idx}}" bindlongpress="doCheck" bindtap="doClickMap">
                 <image class="map-bac"
                        src="../../assets/images/{{bean.checked?'bac_border2.jpg':'bac_border.png'}}"></image>
                 <view class="cell-text">
-                    <text class="text1">{{bean.name}}</text>
-                    <text class="text2">{{bean.remark}}</text>
+                    <text class="text1 singleLine">{{bean.name}}</text>
+                    <text class="text2 singleLine">{{bean.remark}}</text>
                 </view>
             </view>
         </view>
@@ -51,7 +55,7 @@
         <input style="margin-top: 40rpx" placeholder="所属账号" bindinput="doInput" data-type="addAccountName"></input>
         </view>
 
-        <view wx:else>
+        <view wx:if="{{addTitle=='创建副本'}}">
             <input style="margin-top: 80rpx" placeholder="输入副本名" bindinput="doInput" data-type="addMapName"></input>
             <picker bindchange="doWeek"
                     data-type="indexAct" value="3" range="{{weekArrays}}">
@@ -69,6 +73,12 @@
                     <view class="job-dot" style=""></view>
                 </view>
             </picker>
+        </view>
+        <view wx:if="{{addTitle=='删除角色' || addTitle=='删除副本'}}" class="cells-del" style="margin-top: 80rpx">
+            <view class="cell-del" wx:for="{{addTitle=='删除角色'?roleArray:mapArray}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+                  data-position="{{idx}}" bindlongpress="doCheck" bindtap="checkDel">
+                    <text class="text3 singleLine" style="color: {{bean.delChecked?'red':'black'}}">{{bean.name}}</text>
+            </view>
         </view>
 
         <view class="btn2" bindtap="doBtn2">确定</view>

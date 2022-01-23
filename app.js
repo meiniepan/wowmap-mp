@@ -55,6 +55,27 @@ App({
       // 新版本下载失败
     })
   },
+  onUp: function (id, data) {
+    const db = wx.cloud.database()
+    console.log('[数据库] ：', data)
+    wx.showLoading({
+      title: '更新中',
+    })
+    db.collection('maps').doc(id).update({
+      data: {
+        roles: data,
+      },
+
+      success: res => {
+        wx.hideLoading()
+        console.error('[数据库] [更新记录] 成功：', res)
+      },
+      fail: err => {
+        wx.hideLoading()
+        console.error('[数据库] [更新记录] 失败：', err)
+      }
+    })
+  },
 
   globalData: {
     statusBarHeight: 0,
