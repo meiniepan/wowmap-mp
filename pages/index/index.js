@@ -101,7 +101,7 @@ Page({
                 }
 
                 data.forEach(it => {
-                    if ((it.name + it.job+ it.account) == (this.data.curRole.name + this.data.curRole.job+ this.data.curRole.account)) {
+                    if ((it.name + it.job + it.account) == (this.data.curRole.name + this.data.curRole.job + this.data.curRole.account)) {
                         if (res.confirm) {
                             it.checked = true
                             it.next_refresh = next_refresh
@@ -385,7 +385,7 @@ Page({
     },
     setMap: function (it) {
         it.roles.forEach(bean => {
-            if ((bean.name + bean.job+ bean.account) == (this.data.curRole.name + this.data.curRole.job + this.data.curRole.account)) {
+            if ((bean.name + bean.job + bean.account) == (this.data.curRole.name + this.data.curRole.job + this.data.curRole.account)) {
                 it.checked = bean.checked
                 if (it.checked) {//如果已标记，判断是否可以重置
                     let cur = parseInt(new Date().getTime() / 1000)

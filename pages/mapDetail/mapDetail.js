@@ -17,7 +17,7 @@ Page({
         roles.forEach(it => {
             it.checked = false
             bean.roles.forEach(it2 => {
-                if ((it2.name + it2.job+ it2.account) == (it.name + it.job+ it.account) && it2.checked) {
+                if ((it2.name + it2.job + it2.account) == (it.name + it.job + it.account) && it2.checked) {
                     it.checked = true
                     it.next_refresh = it2.next_refresh
                 }
