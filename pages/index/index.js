@@ -16,9 +16,9 @@ Page({
         weekString: "周四",
         gapString: "七天",
         actArrays: ["创建角色", "创建副本", "更换背景", "删除角色", "删除副本",],
-        jobArrays: ["法师", "德鲁伊", "术士", "牧师", "战士", "圣骑士", "猎人", "潜行者",],
-        iconArrays: ["ic_fs.png", "ic_xd.png", "ic_ss.png", "ic_ms.png", "ic_zs.png", "ic_sq.png", "ic_lr.png", "ic_dz.png",],
-        colorArrays: ["#69CCF0", "#FF7D0A", "#9482C9", "#FFFFFF", "#C79C6E", "#F58CBA", "#ABD473", "#FFF569",],
+        jobArrays: ["法师", "德鲁伊", "术士", "牧师", "战士", "圣骑士", "猎人", "潜行者", "萨满祭司",],
+        iconArrays: ["ic_fs.png", "ic_xd.png", "ic_ss.png", "ic_ms.png", "ic_zs.png", "ic_sq.png", "ic_lr.png", "ic_dz.png", "ic_smjs.png"],
+        colorArrays: ["#69CCF0", "#FF7D0A", "#9482C9", "#FFFFFF", "#C79C6E", "#F58CBA", "#ABD473", "#FFF569", "#0070DE"],
         weekArrays: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
         gapArrays: ["三天", "五天", "七天",],
         refresh_time: 1643238000,
@@ -101,7 +101,7 @@ Page({
                 }
 
                 data.forEach(it => {
-                    if (it.name == this.data.curRole.name) {
+                    if ((it.name + it.job+ it.account) == (this.data.curRole.name + this.data.curRole.job+ this.data.curRole.account)) {
                         if (res.confirm) {
                             it.checked = true
                             it.next_refresh = next_refresh
@@ -112,7 +112,13 @@ Page({
                     }
                 })
                 if (!has && res.confirm) {
-                    data.push({name: this.data.curRole.name, checked: true, next_refresh: next_refresh})
+                    data.push({
+                        name: this.data.curRole.name,
+                        job: this.data.curRole.job,
+                        account: this.data.curRole.account,
+                        checked: true,
+                        next_refresh: next_refresh
+                    })
                 }
                 if (res.confirm) {
                     this.data.mapArray[p].checked = true
@@ -134,11 +140,22 @@ Page({
         })
 
     },
-    chooseRole(e) {
-        wx.setStorageSync("cur_role", this.data.roleArray[e.detail.value])
+    setRole(e) {
+        let p = e.currentTarget.dataset.position
+        wx.setStorageSync("cur_role", this.data.roleArray[p])
         this.setData({
-            curRole: this.data.roleArray[e.detail.value]
-        },()=>{this.setMaps()} )
+            curRole: this.data.roleArray[p],
+            show: false,
+        }, () => {
+            this.setMaps()
+        })
+    },
+    chooseRole: function () {
+        this.setData({
+            show: true,
+            addTitle: "选择角色",
+        })
+
     },
     doJob(e) {
 
@@ -186,9 +203,6 @@ Page({
         this.setData({
             show: true,
             addTitle: "创建角色",
-            addRoleName: "",
-            jobString: "法师",
-            addAccountName: "",
         })
 
     },
@@ -362,20 +376,20 @@ Page({
     },
     setMaps() {
         this.data.mapArray.forEach(bean => {
+            bean.checked = false
             this.setMap(bean)
         })
-        console.log("ss",this.data.curRole.name)
-        console.log("dd",this.data.mapArray)
         this.setData({
             mapArray: this.data.mapArray
         })
     },
     setMap: function (it) {
         it.roles.forEach(bean => {
-            if (bean.name == this.data.curRole.name) {
+            if ((bean.name + bean.job+ bean.account) == (this.data.curRole.name + this.data.curRole.job + this.data.curRole.account)) {
                 it.checked = bean.checked
                 if (it.checked) {//如果已标记，判断是否可以重置
                     let cur = parseInt(new Date().getTime() / 1000)
+                    console.log("next_refresh", it.next_refresh)
                     if (cur > it.next_refresh) {
                         it.checked = false
                     }
@@ -458,5 +472,10 @@ Page({
             }
         })
     },
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
 
+    }
 })

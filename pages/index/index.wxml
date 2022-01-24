@@ -4,11 +4,13 @@
     <image class="bac" src="{{bac}}" mode="aspectFill"></image>
     <view class="top" style="margin-top: {{topMargin}}px;z-index: 9">
         <view class="top2">
-            <picker bindchange="chooseRole"
-                    data-type="indexAct" value="{{}}" range="{{roleArray}}" range-key="name">
-            <text class="role singleLine"  style="color:{{curRole.color}}">{{curRole.name+' '+curRole.account}}</text>
-            </picker>
-            <image class="icon" src="../../assets/images/{{curRole.icon}}" mode="aspectFill"></image>
+                <view class="top3" bindtap="chooseRole">
+                    <image class="icon" src="../../assets/images/{{curRole.icon}}" mode="aspectFill"></image>
+
+                    <text class="role singleLine" style="color:{{curRole.color}}">{{curRole.name+' '+curRole.account}}
+                    </text>
+                </view>
+
             <picker bindchange="doAct"
                     data-type="indexAct" value="{{}}" range="{{actArrays}}">
                 <image class="iconAdd" src="../../assets/images/ic_add.png" mode="aspectFill"></image>
@@ -44,15 +46,15 @@
     <view class="layout0">
         <view class="add" style="margin: auto">{{addTitle}}</view>
         <view wx:if="{{addTitle=='创建角色'}}">
-        <input style="margin-top: 80rpx" placeholder="输入角色名" bindinput="doInput" data-type="addRoleName"></input>
-        <picker bindchange="doJob"
-                data-type="indexAct" value="{{}}" range="{{jobArrays}}">
-            <view style="margin-top: 40rpx;display: flex;height: 50rpx;align-items: center">
-                <view class="job" >{{jobString}}</view>
-                <view class="job-dot" style=""></view>
-            </view>
-        </picker>
-        <input style="margin-top: 40rpx" placeholder="所属账号" bindinput="doInput" data-type="addAccountName"></input>
+            <input style="margin-top: 80rpx" placeholder="输入角色名" bindinput="doInput" data-type="addRoleName"></input>
+            <picker bindchange="doJob"
+                    data-type="indexAct" value="{{}}" range="{{jobArrays}}">
+                <view style="margin-top: 40rpx;display: flex;height: 50rpx;align-items: center">
+                    <view class="job">{{jobString}}</view>
+                    <view class="job-dot" style=""></view>
+                </view>
+            </picker>
+            <input style="margin-top: 40rpx" placeholder="所属账号" bindinput="doInput" data-type="addAccountName"></input>
         </view>
 
         <view wx:if="{{addTitle=='创建副本'}}">
@@ -61,7 +63,7 @@
                     data-type="indexAct" value="3" range="{{weekArrays}}">
                 <view style="margin-top: 40rpx;display: flex;height: 50rpx;align-items: center">
                     <view style="margin-right: 40rpx">刷新日</view>
-                    <view class="job" >{{weekString}}</view>
+                    <view class="job">{{weekString}}</view>
                     <view class="job-dot" style=""></view>
                 </view>
             </picker>
@@ -69,18 +71,28 @@
                     data-type="indexAct" value="2" range="{{gapArrays}}">
                 <view style="margin-top: 40rpx;display: flex;height: 50rpx;align-items: center">
                     <view style="margin-right: 40rpx">刷新冷却</view>
-                    <view class="job" >{{gapString}}</view>
+                    <view class="job">{{gapString}}</view>
                     <view class="job-dot" style=""></view>
                 </view>
             </picker>
         </view>
-        <view wx:if="{{addTitle=='删除角色' || addTitle=='删除副本'}}" class="cells-del" style="margin-top: 80rpx">
-            <view class="cell-del" wx:for="{{addTitle=='删除角色'?roleArray:mapArray}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+        <scroll-view wx:if="{{addTitle=='删除角色' || addTitle=='删除副本'}}" class="cells-del" style="margin-top: 80rpx;height: 600rpx;" enable-flex scroll-y>
+            <view class="cell-del" wx:for="{{addTitle=='删除角色'?roleArray:mapArray}}" wx:for-index="idx"
+                  wx:for-item="bean" wx:key="idx" style="{{addTitle=='删除角色'?'':'justify-content: center;'}} background: {{bean.delChecked?'pink':'rgb(125,124,117,0.6)'}}"
                   data-position="{{idx}}" bindlongpress="doCheck" bindtap="checkDel">
-                    <text class="text3 singleLine" style="color: {{bean.delChecked?'red':'black'}}">{{bean.name}}</text>
+                <image wx:if="{{addTitle=='删除角色'}}" class="icon4" src="../../assets/images/{{bean.icon}}" mode="aspectFill"></image>
+                <text class="text4" style="color: {{bean.color}}">{{addTitle=='删除角色'?bean.name+' '+bean.account:bean.name}}</text>
             </view>
-        </view>
+        </scroll-view>
 
-        <view class="btn2" bindtap="doBtn2">确定</view>
+        <scroll-view wx:if="{{addTitle=='选择角色'}}" class="cells-role" style="margin-top: 80rpx;height: 600rpx" enable-flex scroll-y>
+            <view class="cell-role" wx:for="{{roleArray}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+                  data-position="{{idx}}" bindtap="setRole" >
+                <image class="icon4" src="../../assets/images/{{bean.icon}}" mode="aspectFill"></image>
+                <text class="text4" style="color: {{bean.color}}">{{bean.name+' '+bean.account}}</text>
+            </view>
+        </scroll-view>
+
+        <view wx:if="{{addTitle!='选择角色'}}" class="btn2" bindtap="doBtn2">确定</view>
     </view>
 </page-container>
