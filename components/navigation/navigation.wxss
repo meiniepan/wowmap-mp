@@ -1,0 +1,48 @@
+/* components/navigation/navigation.wxss */
+
+
+.cu-custom {
+	display: flex;
+	flex-direction: column;
+}
+
+.cu-bar {
+	display: flex;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 1024;
+	align-items: center;
+	box-sizing: border-box;
+	min-height: 100rpx;
+}
+
+.action:first-child {
+	font-size: 30rpx;
+}
+
+
+.action {
+	display: flex;
+	align-items: center;
+}
+
+
+ .content {
+	position: absolute;
+	text-align: center;
+	width: calc(100% - 340rpx);
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	margin: auto;
+	height: 60rpx;
+	font-size: 36rpx;
+	line-height: 60rpx;
+	cursor: none;
+	pointer-events: none;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+    overflow: hidden;
+}

@@ -4,22 +4,19 @@
     <image class="bac" src="{{bac}}" mode="aspectFill"></image>
     <view class="top" style="margin-top: {{topMargin}}px;z-index: 9">
         <view class="top2">
-                <view class="top3" bindtap="chooseRole">
-                    <image class="icon" src="../../assets/images/{{curRole.icon}}" mode="aspectFill"></image>
-
-                    <text class="role singleLine" style="color:{{curRole.color}}">{{curRole.name+' '+curRole.account}}
-                    </text>
-                </view>
-
+            <view class="top3" bindtap="chooseRole">
+                <image class="icon" src="../../assets/images/{{curRole.icon}}" mode="aspectFill"></image>
+                <text class="role singleLine" style="color:{{curRole.color}}">{{curRole.name}}</text>
+                <text class="role2 singleLine" style="color:{{curRole.color}}">{{curRole.account}}</text>
+            </view>
             <picker bindchange="doAct"
                     data-type="indexAct" value="{{}}" range="{{actArrays}}">
                 <image class="iconAdd" src="../../assets/images/ic_add.png" mode="aspectFill"></image>
-
             </picker>
         </view>
         <view class="cells-map">
-            <view class="cell-map" wx:for="{{mapArray}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
-                  data-position="{{idx}}" bindlongpress="doCheck" bindtap="doClickMap">
+            <view class="cell-map"  wx:for="{{mapArray}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+                  data-position="{{idx}}" animation="{{curMap==idx?animationData:''}}" bindlongpress="doCheck" bindtap="doClickMap">
                 <image class="map-bac"
                        src="../../assets/images/{{bean.checked?'bac_border2.jpg':'bac_border.png'}}"></image>
                 <view class="cell-text">
@@ -76,23 +73,41 @@
                 </view>
             </picker>
         </view>
-        <scroll-view wx:if="{{addTitle=='删除角色' || addTitle=='删除副本'}}" class="cells-del" style="margin-top: 80rpx;height: 600rpx;" enable-flex scroll-y>
+        <scroll-view wx:if="{{addTitle=='删除角色' || addTitle=='删除副本'}}" class="cells-del"
+                     style="margin-top: 80rpx;height: 600rpx;" enable-flex scroll-y>
             <view class="cell-del" wx:for="{{addTitle=='删除角色'?roleArray:mapArray}}" wx:for-index="idx"
-                  wx:for-item="bean" wx:key="idx" style="{{addTitle=='删除角色'?'':'justify-content: center;'}} background: {{bean.delChecked?'pink':'rgb(125,124,117,0.6)'}}"
-                  data-position="{{idx}}" bindlongpress="doCheck" bindtap="checkDel">
-                <image wx:if="{{addTitle=='删除角色'}}" class="icon4" src="../../assets/images/{{bean.icon}}" mode="aspectFill"></image>
-                <text class="text4" style="color: {{bean.color}}">{{addTitle=='删除角色'?bean.name+' '+bean.account:bean.name}}</text>
+                  wx:for-item="bean" wx:key="idx"
+                  style="{{addTitle=='删除角色'?'':'justify-content: center;'}} background: {{bean.delChecked?'pink':'rgb(125,124,117,0.6)'}}"
+                  data-position="{{idx}}" bindtap="checkDel">
+                <image wx:if="{{addTitle=='删除角色'}}" class="icon4" src="../../assets/images/{{bean.icon}}"
+                       mode="aspectFill"></image>
+                <text class="{{addTitle=='删除角色'?'text4':'text4-map'}} singleLine" style="color: {{bean.color}}">{{bean.name}}</text>
+                <text wx:if="{{addTitle=='删除角色'}}" class="text5 singleLine" style="color: {{bean.color}}">{{bean.account}}
+                </text>
             </view>
         </scroll-view>
 
-        <scroll-view wx:if="{{addTitle=='选择角色'}}" class="cells-role" style="margin-top: 80rpx;height: 600rpx" enable-flex scroll-y>
+        <scroll-view wx:if="{{addTitle=='选择角色'}}" class="cells-role" style="margin-top: 80rpx;height: 600rpx"
+                     enable-flex scroll-y>
             <view class="cell-role" wx:for="{{roleArray}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
-                  data-position="{{idx}}" bindtap="setRole" >
+                  data-position="{{idx}}" bindtap="setRole">
                 <image class="icon4" src="../../assets/images/{{bean.icon}}" mode="aspectFill"></image>
-                <text class="text4" style="color: {{bean.color}}">{{bean.name+' '+bean.account}}</text>
+                <text class="text4 singleLine" style="color: {{bean.color}}">{{bean.name}}</text>
+                <text class="text5 singleLine" style="color: {{bean.color}}">{{bean.account}}</text>
             </view>
         </scroll-view>
 
         <view wx:if="{{addTitle!='选择角色'}}" class="btn2" bindtap="doBtn2">确定</view>
     </view>
 </page-container>
+
+<modal show="{{showModal}}" height='200rpx'>
+    　　
+    <view class='modal-content'>
+        <view class="mark-out">
+            <view class="mark" bindtap="doMark">标记</view>
+            <view class="line"></view>
+            <view class="mark" bindtap="undoMark">取消标记</view>
+        </view>
+    </view>
+</modal>

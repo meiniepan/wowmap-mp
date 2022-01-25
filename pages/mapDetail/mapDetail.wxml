@@ -1,11 +1,21 @@
 <!--pages/mapDetail/mapDetail.wxml-->
-<view class="out">
-<view class="cells-role" style="margin-top: 80rpx">
-    <view class="cell-role" wx:for="{{mData.roles}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
-          data-position="{{idx}}" >
-        <image class="icon" src="../../assets/images/{{bean.icon}}" mode="aspectFill"></image>
-        <text class="text" style="color: {{bean.color}}">{{bean.name}}</text>
-        <switch checked="{{bean.checked}}" color="pink" data-position="{{idx}}" bindchange="switchChange"/>
+<view class="out" bindlongpress="chooseAvatar">
+    <image class="bac2" src="{{bac2}}" mode="aspectFill"></image>
+    <view class="out-main">
+    <navigation title="{{title}}">
+        <image class="act" src="../../assets/images/icon_back_black_a.png" mode="widthFix" bindtap="doFinish"></image>
+    </navigation>
+    <view class="cells-role" style="margin-top: 10rpx">
+        <view class="cell-role" catchlongpress="ss" wx:for="{{mData.roles}}" wx:for-index="idx" wx:for-item="bean" wx:key="idx"
+              data-position="{{idx}}">
+            <view class="out2">
+                <image class="icon" src="../../assets/images/{{bean.icon}}" mode="aspectFill"></image>
+                <text class="text singleLine" style="color: {{bean.color}}">{{bean.name}}</text>
+                <text class="text2 singleLine" style="color: {{bean.color}}">{{bean.account}}</text>
+            </view>
+            <switch class="out3" checked="{{bean.checked}}" color='rgb(0,205,255)' data-position="{{idx}}"
+                    bindchange="switchChange"/>
+        </view>
     </view>
-</view>
+    </view>
 </view>

@@ -3,6 +3,8 @@ page {
     --themeColor: #1677FF;
     --tintBac: #F5F7FD;
     --BaseBac: rgb(125,124,117,0.6);
+    --BaseGreen: rgb(0,255,187);
+    --BaseBlue: rgb(0,205,255);
     --tint0: #97A0C3;
     --commonBac: #ffffff;
     --white: #ffffff;

@@ -1,0 +1,9 @@
+<!--assets/components/modal/modal.wxml-->
+<view class='mask' wx:if='{{show}}' bindtap='clickMask'>
+    　　
+    <view class='modal-content' style='height:{{height}}'>
+        　　　　　　
+        <slot></slot>
+        　　
+    </view>
+</view>

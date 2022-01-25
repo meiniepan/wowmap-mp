@@ -1,4 +1,7 @@
 /**index.wxss**/
+page{
+    text-shadow: 1px 1px 2px black;
+}
 .bac {
     display: flex;
     position: fixed;
@@ -19,7 +22,6 @@
 
 .top2 {
     display: flex;
-    height: 100rpx;
     width: 100%;
     align-items: center;
     justify-content: space-between;
@@ -39,15 +41,28 @@
     width: 100rpx;
     height: 100rpx;
     border-radius: 50%;
+    flex-shrink: 0;
 }
 .role {
     display: flex;
     margin-left: 40rpx;
+    flex-grow: 1;
+    text-shadow: 2px 2px 2px black;
+}
+.role2 {
+    font-size: 32rpx;
+    margin-left: 10rpx;
+   margin-right: 40rpx;
+
 }
 .iconAdd {
     width: 100rpx;
     height: 100rpx;
     border-radius: 50%;
+    box-sizing: border-box;
+    margin-top: 10rpx;
+    flex-shrink: 0;
+    background: var(--BaseBac);
 }
 
 
@@ -152,9 +167,44 @@
     width: 70rpx;
     height: 70rpx;
     border-radius: 50%;
-    margin-right: 40rpx;
+    margin-right: 20rpx;
+    flex-shrink: 0;
 }
 .text4{
     display: flex;
-    font-size: 40rpx;
+    font-size: 36rpx;
+    flex-grow: 1;
+}
+.text4-map{
+    display: flex;
+    font-size: 36rpx;
+}
+.text5{
+    display: flex;
+    font-size: 28rpx;
+    margin-left: 10rpx;
+}
+.mark-out{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+.line{
+    width:300rpx;
+    height: 2rpx;
+    background: var(--splitColor);
+    margin: 0rpx 20rpx;
+    box-sizing: border-box;
+}
+.mark{
+    display: flex;
+    width: 300rpx;
+    height: 80rpx;
+    align-items: center;
+    justify-content: center;
+    color: var(--themeColor);
 }
