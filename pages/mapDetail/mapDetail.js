@@ -6,7 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        bac2:wx.getStorageSync("bac2"),
+        bac2:"",
     },
 
     /**
@@ -31,9 +31,9 @@ Page({
             mData: bean,
             mapArray: beans,
             mP: p,
-            title: bean.name
+            title: bean.name,
+            bac2:wx.getStorageSync("bac2"),
         })
-
     },
 
     /**
